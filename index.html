@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b1120" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>MATH BATTLE — Batalha Matemática</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/svg+xml" href="icon.svg" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main id="app" class="app-shell">
+
+    <!-- TELA 1: CONFIGURAÇÃO DE DIFICULDADE -->
+    <section id="screen-difficulty" class="screen active" aria-label="Escolha de Dificuldade">
+      <header class="setup-header">
+        <div class="brand-badge">2 JOGADORES • MESMO CELULAR</div>
+        <h1 class="game-title">MATH <span>BATTLE</span></h1>
+        <p class="subtitle">1. Personalize os nomes e escolha a dificuldade</p>
+      </header>
+
+      <div class="players-name-bar">
+        <div class="name-input-group p1-accent">
+          <label for="input-p1-name">Topo (Invertido)</label>
+          <input id="input-p1-name" type="text" maxlength="14" value="JOGADOR 1" placeholder="Jogador 1" />
+        </div>
+        <div class="vs-pill">VS</div>
+        <div class="name-input-group p2-accent">
+          <label for="input-p2-name">Base (Normal)</label>
+          <input id="input-p2-name" type="text" maxlength="14" value="JOGADOR 2" placeholder="Jogador 2" />
+        </div>
+      </div>
+
+      <div id="difficulty-list" class="difficulty-grid" role="radiogroup" aria-label="Níveis de dificuldade">
+        <button type="button" class="diff-card" data-level="0">
+          <div class="diff-top">
+            <span class="diff-level">NÍVEL 0</span>
+            <span class="diff-name">Muito Fácil</span>
+          </div>
+          <span class="diff-example">Ex: 1 + 2 &nbsp;•&nbsp; 5 − 3 &nbsp;•&nbsp; 2 × 2</span>
+        </button>
+
+        <button type="button" class="diff-card" data-level="1">
+          <div class="diff-top">
+            <span class="diff-level">NÍVEL 1</span>
+            <span class="diff-name">Fácil</span>
+          </div>
+          <span class="diff-example">Ex: 12 + 8 &nbsp;•&nbsp; 15 − 7 &nbsp;•&nbsp; 4 × 3</span>
+        </button>
+
+        <button type="button" class="diff-card selected" data-level="2">
+          <div class="diff-top">
+            <span class="diff-level">NÍVEL 2</span>
+            <span class="diff-name">Normal</span>
+          </div>
+          <span class="diff-example">Ex: 45 + 38 &nbsp;•&nbsp; 72 − 29 &nbsp;•&nbsp; 12 × 6</span>
+        </button>
+
+        <button type="button" class="diff-card" data-level="3">
+          <div class="diff-top">
+            <span class="diff-level">NÍVEL 3</span>
+            <span class="diff-name">Intermediário</span>
+          </div>
+          <span class="diff-example">Ex: 125 + 278 &nbsp;•&nbsp; 144 ÷ 12 &nbsp;•&nbsp; 15 × 14</span>
+        </button>
+
+        <button type="button" class="diff-card" data-level="4">
+          <div class="diff-top">
+            <span class="diff-level">NÍVEL 4</span>
+            <span class="diff-name">Difícil</span>
+          </div>
+          <span class="diff-example">Ex: 235 × 12 &nbsp;•&nbsp; 625 ÷ 25 &nbsp;•&nbsp; 18²</span>
+        </button>
+
+        <button type="button" class="diff-card" data-level="5">
+          <div class="diff-top">
+            <span class="diff-level">NÍVEL 5</span>
+            <span class="diff-name">Muito Difícil</span>
+          </div>
+          <span class="diff-example">Ex: 12² + 5² &nbsp;•&nbsp; √1024 &nbsp;•&nbsp; (180 ÷ 12) × 7</span>
+        </button>
+      </div>
+
+      <footer class="setup-footer">
+        <button id="btn-to-operations" type="button" class="btn-primary">
+          Escolher Operações →
+        </button>
+      </footer>
+    </section>
+
+    <!-- TELA 2: ESCOLHA DAS OPERAÇÕES -->
+    <section id="screen-operations" class="screen" aria-label="Escolha de Operações">
+      <header class="setup-header">
+        <div class="header-nav-row">
+          <button id="btn-back-difficulty" type="button" class="btn-ghost">← Nível</button>
+          <span id="selected-level-badge" class="level-pill">Nível 2 • Normal</span>
+        </div>
+        <h2 class="section-title">Operações da Batalha</h2>
+        <p class="subtitle">Selecione uma, várias ou todas as operações</p>
+      </header>
+
+      <div class="ops-bulk-actions">
+        <button id="btn-select-all-ops" type="button" class="btn-secondary">Selecionar Todas</button>
+        <button id="btn-clear-ops" type="button" class="btn-secondary">Limpar Seleção</button>
+      </div>
+
+      <div id="operations-grid" class="operations-grid">
+        <button type="button" class="op-card active" data-op="add" aria-pressed="true">
+          <span class="op-symbol">+</span>
+          <span class="op-label">Adição</span>
+        </button>
+
+        <button type="button" class="op-card active" data-op="sub" aria-pressed="true">
+          <span class="op-symbol">−</span>
+          <span class="op-label">Subtração</span>
+        </button>
+
+        <button type="button" class="op-card active" data-op="mul" aria-pressed="true">
+          <span class="op-symbol">×</span>
+          <span class="op-label">Multiplicação</span>
+        </button>
+
+        <button type="button" class="op-card" data-op="div" aria-pressed="false">
+          <span class="op-symbol">÷</span>
+          <span class="op-label">Divisão</span>
+        </button>
+
+        <button type="button" class="op-card" data-op="pow" aria-pressed="false">
+          <span class="op-symbol">xⁿ</span>
+          <span class="op-label">Potenciação</span>
+        </button>
+
+        <button type="button" class="op-card" data-op="root" aria-pressed="false">
+          <span class="op-symbol">√</span>
+          <span class="op-label">Radiciação</span>
+        </button>
+      </div>
+
+      <p id="ops-validation-msg" class="validation-msg" role="alert">
+        Selecione pelo menos uma operação para iniciar.
+      </p>
+
+      <footer class="setup-footer">
+        <button id="btn-start-battle" type="button" class="btn-primary btn-start">
+          INICIAR BATALHA!
+        </button>
+      </footer>
+    </section>
+
+    <!-- TELA 3: ARENA DA BATALHA (SPLIT-SCREEN 180°) -->
+    <section id="screen-battle" class="screen battle-screen" aria-label="Arena de Batalha">
+
+      <!-- JOGADOR 1 — METADE SUPERIOR (INVERTIDA EM 180 GRAUS) -->
+      <article id="zone-p1" class="player-zone player-top" data-player="1">
+        <div class="feedback-overlay" id="feedback-p1" aria-hidden="true"></div>
+
+        <header class="player-hud">
+          <div class="player-identity">
+            <span class="player-dot p1-dot"></span>
+            <span id="hud-name-p1" class="player-name">JOGADOR 1</span>
+          </div>
+          <div class="score-container">
+            <div id="pips-p1" class="score-pips" aria-hidden="true"></div>
+            <div class="score-badge">
+              <span id="score-p1" class="score-value">0</span>
+              <span class="score-max">/10</span>
+            </div>
+          </div>
+        </header>
+
+        <div class="question-stage">
+          <div id="question-p1" class="question-text">0 + 0</div>
+          <span id="delta-p1" class="score-delta" aria-hidden="true">+1</span>
+        </div>
+
+        <div id="options-p1" class="options-grid" role="group" aria-label="Alternativas Jogador 1">
+          <button type="button" class="answer-btn" data-index="0">0</button>
+          <button type="button" class="answer-btn" data-index="1">0</button>
+          <button type="button" class="answer-btn" data-index="2">0</button>
+          <button type="button" class="answer-btn" data-index="3">0</button>
+        </div>
+      </article>
+
+      <!-- DIVISÓRIA CENTRAL COM BOTÃO DE SAÍDA SEGURA -->
+      <div class="arena-divider">
+        <div class="divider-line"></div>
+        <button id="btn-abort-match" type="button" class="abort-btn" title="Encerrar partida" aria-label="Encerrar partida">
+          ✕
+        </button>
+        <div class="divider-line"></div>
+      </div>
+
+      <!-- JOGADOR 2 — METADE INFERIOR (ORIENTAÇÃO NORMAL) -->
+      <article id="zone-p2" class="player-zone player-bottom" data-player="2">
+        <div class="feedback-overlay" id="feedback-p2" aria-hidden="true"></div>
+
+        <header class="player-hud">
+          <div class="player-identity">
+            <span class="player-dot p2-dot"></span>
+            <span id="hud-name-p2" class="player-name">JOGADOR 2</span>
+          </div>
+          <div class="score-container">
+            <div id="pips-p2" class="score-pips" aria-hidden="true"></div>
+            <div class="score-badge">
+              <span id="score-p2" class="score-value">0</span>
+              <span class="score-max">/10</span>
+            </div>
+          </div>
+        </header>
+
+        <div class="question-stage">
+          <div id="question-p2" class="question-text">0 + 0</div>
+          <span id="delta-p2" class="score-delta" aria-hidden="true">+1</span>
+        </div>
+
+        <div id="options-p2" class="options-grid" role="group" aria-label="Alternativas Jogador 2">
+          <button type="button" class="answer-btn" data-index="0">0</button>
+          <button type="button" class="answer-btn" data-index="1">0</button>
+          <button type="button" class="answer-btn" data-index="2">0</button>
+          <button type="button" class="answer-btn" data-index="3">0</button>
+        </div>
+      </article>
+
+      <!-- OVERLAY DE CONTAGEM REGRESSIVA SINCRONIZADA -->
+      <div id="countdown-overlay" class="countdown-overlay hidden" aria-hidden="true">
+        <div class="countdown-dual">
+          <span class="countdown-num rotated" id="countdown-top">3</span>
+          <span class="countdown-num" id="countdown-bottom">3</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TELA 4: VITÓRIA -->
+    <section id="screen-victory" class="screen victory-screen" aria-label="Resultado da Partida">
+      <div id="confetti-container" class="confetti-container" aria-hidden="true"></div>
+
+      <div class="victory-card">
+        <div class="trophy-icon" aria-hidden="true">🏆</div>
+        <span class="victory-kicker">FIM DE BATALHA</span>
+        <h2 id="winner-title" class="winner-title">JOGADOR 1 VENCEU!</h2>
+        <p id="victory-subtitle" class="victory-subtitle">Primeiro a alcançar 10 pontos!</p>
+
+        <div class="final-scoreboard">
+          <div id="final-card-p1" class="final-player-box">
+            <span id="final-name-p1" class="final-p-name">JOGADOR 1</span>
+            <span id="final-score-p1" class="final-p-score">10</span>
+            <span id="final-stats-p1" class="final-p-stats">10 acertos • 0 erros</span>
+          </div>
+
+          <div class="final-vs">×</div>
+
+          <div id="final-card-p2" class="final-player-box">
+            <span id="final-name-p2" class="final-p-name">JOGADOR 2</span>
+            <span id="final-score-p2" class="final-p-score">7</span>
+            <span id="final-stats-p2" class="final-p-stats">7 acertos • 1 erro</span>
+          </div>
+        </div>
+
+        <div class="victory-actions">
+          <button id="btn-play-again" type="button" class="btn-primary">
+            ↻ Jogar Novamente
+          </button>
+          <button id="btn-back-config" type="button" class="btn-secondary btn-full">
+            ⚙ Configurar Partida
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch((err) => {
+          console.warn('Falha ao registrar Service Worker:', err);
+        });
+      });
+    }
+  </script>
+</body>
+</html>
