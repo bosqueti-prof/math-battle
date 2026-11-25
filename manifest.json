@@ -1,7 +1,8 @@
 {
-  "name": "MATH BATTLE — Batalha Matemática",
+  "id": "/math-battle/",
+  "name": "MATH BATTLE - Batalha Matematica",
   "short_name": "Math Battle",
-  "description": "Jogo de matemática competitivo para 2 jogadores no mesmo celular.",
+  "description": "Jogo de matematica competitivo para 2 jogadores no mesmo celular.",
   "start_url": "/math-battle/index.html",
   "scope": "/math-battle/",
   "display": "standalone",
