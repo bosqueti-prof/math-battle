@@ -2,17 +2,29 @@
   "name": "MATH BATTLE — Batalha Matemática",
   "short_name": "Math Battle",
   "description": "Jogo de matemática competitivo para 2 jogadores no mesmo celular.",
-  "start_url": "./index.html",
+  "start_url": "/math-battle/index.html",
+  "scope": "/math-battle/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#0b1120",
   "theme_color": "#0b1120",
   "icons": [
     {
-      "src": "./icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "https://bosqueti-prof.github.io/math-battle/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://bosqueti-prof.github.io/math-battle/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
       "purpose": "any maskable"
+    },
+    {
+      "src": "/math-battle/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
     }
   ]
 }
